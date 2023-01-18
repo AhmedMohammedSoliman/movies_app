@@ -3,8 +3,13 @@ import 'package:movies_app/categoryListFiltered/categoryListFiltered.dart';
 import 'package:movies_app/majorScreen.dart';
 import 'package:movies_app/movie_details/movie_details_screen.dart';
 import 'package:movies_app/theming/themeData.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await FirebaseFirestore.instance.disableNetwork();
   runApp(const MyApp());
 }
 
