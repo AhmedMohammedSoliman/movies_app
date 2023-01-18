@@ -10,6 +10,13 @@ class ThemingData {
       unselectedItemColor: Colors.white ,
       selectedLabelStyle: TextStyle(color: Colors.yellow),
       unselectedLabelStyle: TextStyle(color: Colors.white),
+    ),
+    textTheme: TextTheme(
+      headline1: TextStyle(color: Colors.white , fontSize: 20 , fontWeight: FontWeight.bold ,),
+    ),
+    iconTheme: IconThemeData(
+      color: Colors.white
     )
+
   );
   }
