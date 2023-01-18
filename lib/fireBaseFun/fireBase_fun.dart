@@ -3,14 +3,14 @@ import 'package:movies_app/FireBaseModel/FireBaseModel.dart';
 
 class FireBaseFun {
 
-  CollectionReference<FavouriteModel> getCollectionFromFireBase (){
+  static CollectionReference<FavouriteModel> getCollectionFromFireBase (){
     return FirebaseFirestore.instance.collection('movie').withConverter<FavouriteModel>(
       fromFirestore: (snapshot, _) => FavouriteModel.fromJson(snapshot.data()!),
       toFirestore: (movie, _) => movie.toJson(),
     );
   }
 
-  Future<void> addMovieToFireBase(FavouriteModel movie){
+ static Future<void> addMovieToFireBase(FavouriteModel movie){
     var collection = getCollectionFromFireBase() ;
     var doc = collection.doc() ;
     movie.id = doc.id ;
