@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movies_app/movie_details/similarListScreen.dart';
+import 'package:movies_app/movie_details/similarListScreen_top_rated.dart';
 class MovieDetailsScreen extends StatelessWidget{
   static const String routeName = "details";
 
@@ -29,13 +31,12 @@ class MovieDetailsScreen extends StatelessWidget{
               )
             ],
           ),
-          SizedBox(height: 20,),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Text(args["title"], style: TextStyle(color: Colors.white , fontSize: 20 , fontWeight: FontWeight.bold),),
           ),
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.only(left: 10),
             child: Text(args["date"], style: TextStyle(color: Colors.grey , fontSize: 18 , fontWeight: FontWeight.bold),),
           ),
          Padding(
@@ -78,10 +79,11 @@ class MovieDetailsScreen extends StatelessWidget{
       ),
          ),
          Padding(
-           padding: const EdgeInsets.all(10.0),
+           padding: const EdgeInsets.only(left: 10 , top: 5 , bottom: 5),
            child: Text("More like this" , style: TextStyle(color: Colors.white ,
            fontWeight: FontWeight.bold , fontSize: 20)),
          ),
+          SimilarListScreen(results: args["results"])
         ]
     )
     );

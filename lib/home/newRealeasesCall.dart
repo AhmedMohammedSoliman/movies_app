@@ -55,7 +55,9 @@ class _NewRealeaseCallState extends State<NewRealeaseCall> implements NewRealeas
                         navigateToMovieDetails(newRealeaseList[index]);
                       },
                       child: NewRealeaseWidget(image:
-                      'https://image.tmdb.org/t/p/w500/${newRealeaseList[index].posterPath}'),
+                      'https://image.tmdb.org/t/p/w500/${newRealeaseList[index].posterPath}',
+                        results: newRealeaseList[index],
+                        ),
                     ),
                     separatorBuilder: (context , index) => SizedBox(width: 10,),
                     itemCount: newRealeaseList.length),
@@ -77,6 +79,7 @@ class _NewRealeaseCallState extends State<NewRealeaseCall> implements NewRealeas
       "rate" : results.voteAverage ,
       "date" : results.releaseDate ,
       "description" : results.overview ,
+      "results" : results
     });
   }
 }

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:movies_app/model/CategoryModel.dart';
 import 'package:movies_app/model/PopularModel.dart';
+import 'package:movies_app/model/SimilarModel.dart';
 import 'package:movies_app/model/TopRatedModel.dart';
 
 import '../model/CategoryFilteredListModel.dart';
@@ -90,4 +91,40 @@ class ApiFun {
      }
    }
 
-}
+   static Future<SimilarModel> getSimilarList (Results results) async{
+   // https://api.themoviedb.org/3/movie/315162/similar?
+     // api_key=0f0542083e9ac60244dac6c8fc27ec2f&language=en-US&page=1
+   var url = Uri.https(baseURL, "/3/movie/${results.id}/similar" , {
+     "api_key" : "0f0542083e9ac60244dac6c8fc27ec2f" ,
+     "language" : "en-US",
+     "page" : "1"
+   });
+   try {
+     var response = await http.get(url);
+     var body = response.body ;
+     var json = jsonDecode(body) ;
+     var similarListModel = SimilarModel.fromJson(json);
+     return similarListModel ;
+   }catch (e){
+     rethrow ;
+   }
+   }
+  static Future<SimilarModel> getSimilarListTopRated (ResultsTopRated results) async{
+    // https://api.themoviedb.org/3/movie/315162/similar?
+    // api_key=0f0542083e9ac60244dac6c8fc27ec2f&language=en-US&page=1
+    var url = Uri.https(baseURL, "/3/movie/${results.id}/similar" , {
+      "api_key" : "0f0542083e9ac60244dac6c8fc27ec2f" ,
+      "language" : "en-US",
+      "page" : "1"
+    });
+    try {
+      var response = await http.get(url);
+      var body = response.body ;
+      var json = jsonDecode(body) ;
+      var similarListModel = SimilarModel.fromJson(json);
+      return similarListModel ;
+    }catch (e){
+      rethrow ;
+    }
+  }
+   }

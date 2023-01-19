@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/home/topRatedWidget.dart';
 import 'package:movies_app/home_navigator/top_rated_navigator.dart';
 import 'package:movies_app/home_view_model/top_rated_view_model.dart';
-import 'package:movies_app/model/PopularModel.dart';
 import 'package:movies_app/model/TopRatedModel.dart';
 import 'package:movies_app/movie_details/movie_details_screen.dart';
+import 'package:movies_app/movie_details/movie_details_screen_topRated.dart';
+import 'package:movies_app/watchList/watchListScreen.dart';
 import 'package:provider/provider.dart';
 
 import '../api_Functions/api_fun.dart';
@@ -58,7 +59,8 @@ class _TopRatedCallState extends State<TopRatedCall> implements TopRatedNavigato
                            image: 'https://image.tmdb.org/t/p/w500/${topRatedList[index].posterPath}',
                            title: topRatedList[index].title ?? "",
                            date: topRatedList[index].releaseDate  ?? "",
-                           vote: topRatedList[index].voteAverage ?? 0),
+                           vote: topRatedList[index].voteAverage ?? 0,
+                         resultsTopRated: topRatedList[index],),
                      ),
                      separatorBuilder: (context , index) => SizedBox(width: 10,),
                      itemCount: topRatedList.length),
@@ -71,14 +73,16 @@ class _TopRatedCallState extends State<TopRatedCall> implements TopRatedNavigato
 
   @override
   void navigateToDetails(ResultsTopRated results) {
-    Navigator.pushNamed(context, MovieDetailsScreen.routeName , arguments: {
+    Navigator.pushNamed(context, MovieDetailsScreenTopRated.routeName , arguments: {
       "title" : results.title ,
       "image" : results.backdropPath,
       "poster" : results.posterPath ,
       "rate" : results.voteAverage ,
       "date" : results.releaseDate ,
       "description" : results.overview ,
+      "results" : results
     });
   }
+
 
 }

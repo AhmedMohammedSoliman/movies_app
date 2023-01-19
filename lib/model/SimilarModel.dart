@@ -19,14 +19,14 @@ class SimilarModel {
     if (json['results'] != null) {
       results = [];
       json['results'].forEach((v) {
-        results?.add(Results.fromJson(v));
+        results?.add(ResultsSimilar.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
   }
   int? page;
-  List<Results>? results;
+  List<ResultsSimilar>? results;
   int? totalPages;
   int? totalResults;
   String? code ;
@@ -60,8 +60,8 @@ class SimilarModel {
 /// vote_average : 7.824
 /// vote_count : 17249
 
-class Results {
-  Results({
+class ResultsSimilar {
+  ResultsSimilar({
       this.adult, 
       this.backdropPath, 
       this.genreIds, 
@@ -77,7 +77,7 @@ class Results {
       this.voteAverage, 
       this.voteCount,});
 
-  Results.fromJson(dynamic json) {
+  ResultsSimilar.fromJson(dynamic json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'] != null ? json['genre_ids'].cast<int>() : [];

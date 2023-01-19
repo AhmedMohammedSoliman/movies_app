@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/api_Functions/api_fun.dart';
+import 'package:movies_app/categoryListFiltered/categoryfFlteredScreen.dart';
 
 import '../model/CategoryFilteredListModel.dart';
 
@@ -38,11 +39,12 @@ class CategoryListFiltered extends StatelessWidget {
                                           //dat
                var categoryFilteredList = asyncSnapShot.data?.results ?? [];
                return ListView.separated(
-                   itemBuilder: (context , index) => Container(
-                     child: Text(categoryFilteredList[index].releaseDate ?? ""
-                       , style: TextStyle(color: Colors.white),),
-                   ),
-                   separatorBuilder: (context , index) => SizedBox(height: 10,),
+                   itemBuilder: (context , index) => CategoryFilteredWidget(
+                       image: 'https://image.tmdb.org/t/p/w500/${categoryFilteredList[index].posterPath}',
+                       date: categoryFilteredList[index].releaseDate ?? "",
+                       title: categoryFilteredList[index].title ?? "",
+                       lan: categoryFilteredList[index].originalLanguage ?? ""),
+                   separatorBuilder: (context , index) => Divider(color: Colors.white,),
                    itemCount: categoryFilteredList.length);
                                        }
                                   }),

@@ -16,4 +16,11 @@ class FireBaseFun {
     movie.id = doc.id ;
    return  doc.set(movie) ;
   }
+
+  static Stream<QuerySnapshot<FavouriteModel>> getMoviesFromFireBase () {
+  return  getCollectionFromFireBase().snapshots() ;
+  }
+  static Future<void> deleteMovieFromFireBase () async {
+    return await getCollectionFromFireBase().doc().delete();
+  }
 }

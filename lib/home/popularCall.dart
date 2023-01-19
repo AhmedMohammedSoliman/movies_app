@@ -74,6 +74,7 @@ class _PopularCallState extends State<PopularCall> implements PopularNavigator {
       "rate" : result.voteAverage ,
       "date" : result.releaseDate ,
       "description" : result.overview ,
+      "results" : result
     });
   }
 }

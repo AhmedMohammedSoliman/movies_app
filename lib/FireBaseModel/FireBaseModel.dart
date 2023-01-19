@@ -8,24 +8,24 @@ class FavouriteModel {
 
  String image;
 
- String originTitle;
+ String lan;
 
  FavouriteModel({this.id = "", required this.title, required this.image,
-  required this.date, required this.originTitle});
+  required this.date, required this.lan});
 
  FavouriteModel.fromJson(Map<String, Object?> json)
      : this(
   title: json['title']! as String,
   date: json['date']! as String,
   image: json['image']! as String,
-  originTitle: json['original_title']! as String,
+  lan: json['lan']! as String,
   id: json['id']! as String,
  );
 
  Map<String, Object?> toJson() {
   return {
    'title': title,
-   'original_title': originTitle,
+   'lan': lan,
    'date': date,
    'image': image,
    'id': id,
