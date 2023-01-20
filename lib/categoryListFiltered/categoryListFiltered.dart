@@ -20,7 +20,7 @@ class CategoryListFiltered extends StatelessWidget {
         centerTitle: true,
       ),
       body: FutureBuilder<CategoryFilteredListModel>(
-        future: ApiFun.getCategoryFilterList(),
+        future: ApiFun.getCategoryFilterList(args["genreId"]),
           builder: (context , asyncSnapShot) {
              if (asyncSnapShot.connectionState == ConnectionState.waiting) {
                return Center(child: CircularProgressIndicator(),);
@@ -30,7 +30,7 @@ class CategoryListFiltered extends StatelessWidget {
                         Text(asyncSnapShot.error.toString() , style: TextStyle(color: Colors.white),) ,
                            ElevatedButton(
                             onPressed: (){
-                               ApiFun.getCategoryFilterList() ;
+                               ApiFun.getCategoryFilterList(args["genreId"]) ;
                                 },
                                child: Text("Try again"))
                               ],

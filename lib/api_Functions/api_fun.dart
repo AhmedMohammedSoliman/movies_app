@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:movies_app/model/CategoryModel.dart';
 import 'package:movies_app/model/PopularModel.dart';
+import 'package:movies_app/model/SearchModel.dart';
 import 'package:movies_app/model/SimilarModel.dart';
 import 'package:movies_app/model/TopRatedModel.dart';
 
@@ -66,7 +67,7 @@ class ApiFun {
      }
    }
 
-   static Future<CategoryFilteredListModel> getCategoryFilterList ()async{
+   static Future<CategoryFilteredListModel> getCategoryFilterList (int genreId)async{
    // https://api.themoviedb.org/3/discover/movie?
      // api_key=0f0542083e9ac60244dac6c8fc27ec2f&language=en-US&
      // sort_by=popularity.desc&include_adult=false&
@@ -78,7 +79,8 @@ class ApiFun {
        "include_adult" : "false" ,
        "include_video" : "false" ,
        "page" : "1" ,
-       "with_watch_monetization_types" : "flatrate"
+       "with_watch_monetization_types" : "flatrate" ,
+       "with_genres" : "${genreId}"
      });
      try {
        var response = await http.get(url);
@@ -110,6 +112,46 @@ class ApiFun {
    }
    }
   static Future<SimilarModel> getSimilarListTopRated (ResultsTopRated results) async{
+    // https://api.themoviedb.org/3/movie/315162/similar?
+    // api_key=0f0542083e9ac60244dac6c8fc27ec2f&language=en-US&page=1
+    var url = Uri.https(baseURL, "/3/movie/${results.id}/similar" , {
+      "api_key" : "0f0542083e9ac60244dac6c8fc27ec2f" ,
+      "language" : "en-US",
+      "page" : "1"
+    });
+    try {
+      var response = await http.get(url);
+      var body = response.body ;
+      var json = jsonDecode(body) ;
+      var similarListModel = SimilarModel.fromJson(json);
+      return similarListModel ;
+    }catch (e){
+      rethrow ;
+    }
+  }
+
+  static Future<SearchModel> getSearchList (String query)async{
+   // https://api.themoviedb.org/3/search/movie?
+    // api_key=0f0542083e9ac60244dac6c8fc27ec2f
+    // &language=en-US&page=1&include_adult=false&query=ahmed
+   var url = Uri.https(baseURL, "/3/search/movie" , {
+  "api_key" : "0f0542083e9ac60244dac6c8fc27ec2f" ,
+     "language" : "en-US" ,
+     "page" : "1" ,
+     "include_adult" : "false" ,
+     "query" : query
+   });
+   try{
+     var response = await http.get(url);
+     var body = response.body ;
+     var json = jsonDecode(body) ;
+     var searchModel = SearchModel.fromJson(json);
+     return searchModel ;
+   }catch(e){
+     rethrow ;
+   }
+  }
+  static Future<SimilarModel> getSimilarListSearch (SearchResults results) async{
     // https://api.themoviedb.org/3/movie/315162/similar?
     // api_key=0f0542083e9ac60244dac6c8fc27ec2f&language=en-US&page=1
     var url = Uri.https(baseURL, "/3/movie/${results.id}/similar" , {

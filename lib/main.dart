@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/categoryListFiltered/categoryListFiltered.dart';
 import 'package:movies_app/majorScreen.dart';
 import 'package:movies_app/movie_details/movie_details_screen.dart';
+import 'package:movies_app/movie_details/movie_details_screen_search.dart';
 import 'package:movies_app/movie_details/movie_details_screen_topRated.dart';
 import 'package:movies_app/theming/themeData.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
         MajorScreen.routeName : (context) => MajorScreen(),
         MovieDetailsScreen.routeName :(context) => MovieDetailsScreen(),
         MovieDetailsScreenTopRated.routeName :(context) => MovieDetailsScreenTopRated(),
+        MovieDetailsScreenSearch.routeName :(context) => MovieDetailsScreenSearch(),
         CategoryListFiltered.routeName : (context) => CategoryListFiltered(),
         WatchListScreen.routeName : (context) => WatchListScreen()
       } ,

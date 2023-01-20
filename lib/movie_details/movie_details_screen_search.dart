@@ -1,22 +1,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:movies_app/model/TopRatedModel.dart';
-import 'package:movies_app/movie_details/similarListScreen_top_rated.dart';
-import 'package:movies_app/movie_details_view_model/movie_details_top_rated_view_model.dart';
+import 'package:movies_app/model/SearchModel.dart';
+import 'package:movies_app/movie_details/similarListScreen_search.dart';
+import 'package:movies_app/movie_details_navigator/movie_details_search_navigator.dart';
+import 'package:movies_app/movie_details_view_model/movie_details_search_view_model.dart';
 import 'package:movies_app/watchList/watchListScreen.dart';
 import 'package:provider/provider.dart';
-
-import '../movie_details_navigator/movie_details_top_rated_navigator.dart';
-class MovieDetailsScreenTopRated extends StatefulWidget{
-  static const String routeName = "detailsTop";
+class MovieDetailsScreenSearch extends StatefulWidget{
+  static const String routeName = "detailsSearch";
 
   @override
-  State<MovieDetailsScreenTopRated> createState() => _MovieDetailsScreenTopRatedState();
+  State<MovieDetailsScreenSearch> createState() => _MovieDetailsScreenSearchState();
 }
 
-class _MovieDetailsScreenTopRatedState extends State<MovieDetailsScreenTopRated> implements MovieDetailsTopRatedNavigator{
+class _MovieDetailsScreenSearchState extends State<MovieDetailsScreenSearch> implements MovieDetailsSearchNavigator{
+  MovieDetailsSearchViewModel viewModel = MovieDetailsSearchViewModel();
 
-  MovieDetailsTopRatedViewModel viewModel = MovieDetailsTopRatedViewModel();
+  @override
+  void initState() {
+    viewModel.navigator = this ;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var args = ModalRoute.of(context)?.settings.arguments as Map ;
@@ -67,8 +72,9 @@ class _MovieDetailsScreenTopRatedState extends State<MovieDetailsScreenTopRated>
                             backgroundColor: Color(0xff514F4F),
                             child: IconButton(
                                 onPressed: (){
-                                   navigatorToFavourite();
-                                   addMovie(args["results"]);
+                                navigateToFavourite();
+                                addMovie (args["results"]);
+                                print("added");
                                 },
                                 icon: Icon(Icons.add , color: Colors.white, size: 20,)),
                           )
@@ -98,7 +104,7 @@ class _MovieDetailsScreenTopRatedState extends State<MovieDetailsScreenTopRated>
                   child: Text("More like this" , style: TextStyle(color: Colors.white ,
                       fontWeight: FontWeight.bold , fontSize: 20)),
                 ),
-                SimilarListScreenTopRated(results: args["results"])
+                SimilarListScreenSearch(results: args["results"])
               ]
           )
       ),
@@ -106,15 +112,15 @@ class _MovieDetailsScreenTopRatedState extends State<MovieDetailsScreenTopRated>
   }
 
   @override
-  void navigatorToFavourite() {
+  void navigateToFavourite() {
     Navigator.pushNamed(context, WatchListScreen.routeName);
   }
 
-  void addMovie(ResultsTopRated resultsTopRated) {
-    viewModel.addMovieToFavourite(
-        resultsTopRated.title ?? "",
-        resultsTopRated.posterPath ?? "",
-        resultsTopRated.releaseDate ?? "",
-        resultsTopRated.originalLanguage ?? "");
+  void addMovie(SearchResults results) {
+    viewModel.addMovieToFireBase(
+        results.title ?? "",
+        results.posterPath ?? "",
+        results.releaseDate ?? "",
+        results.originalLanguage ?? "");
   }
 }

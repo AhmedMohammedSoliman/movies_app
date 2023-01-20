@@ -93,7 +93,8 @@ class _BrowseScreenState extends State<BrowseScreen> implements BrowseNavigator{
   @override
   void navigateToCategoryFiltered(Genres genres) {
     Navigator.pushNamed(context, CategoryListFiltered.routeName , arguments: {
-      "category_name" : genres.name
+      "category_name" : genres.name ,
+      "genreId" : genres.id
     });
   }
 }
