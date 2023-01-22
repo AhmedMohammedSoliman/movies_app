@@ -33,14 +33,15 @@ class WatchListScreen extends StatelessWidget{
                     print("done");
                     var moviesList = asyncSnapShot.data?.docs.map((doc) => doc.data()).toList() ?? [];
                     return moviesList.length == 0 ? Center(child: Text("There is no watch list yet" ,
-                    style: TextStyle(color: Colors.white),),) : ListView.separated(
+                    style: TextStyle(color: Colors.white , fontSize: 20),),) : ListView.separated(
                       separatorBuilder: (context , index) => Divider(color: Colors.white,),
                         itemCount: moviesList.length ,
                         itemBuilder: (context , index) => WatchItem(
                             title: moviesList[index].title ,
                             image: 'https://image.tmdb.org/t/p/w500/${moviesList[index].image}',
                             date: moviesList[index].date ,
-                            lan: moviesList[index].lan
+                            lan: moviesList[index].lan,
+                            movie: moviesList[index],
                             ));
                   }
             }),

@@ -11,8 +11,9 @@ class TopRatedWidget extends StatefulWidget {
   String date ;
   double vote ;
   ResultsTopRated resultsTopRated ;
+  List<ResultsTopRated> resultsTopRatedList ;
   TopRatedWidget({required this.image , required this.title , required this.date , required this.vote ,
-  required this.resultsTopRated});
+  required this.resultsTopRated , required this.resultsTopRatedList});
 
   @override
   State<TopRatedWidget> createState() => _TopRatedWidgetState();
@@ -52,8 +53,14 @@ class _TopRatedWidgetState extends State<TopRatedWidget> implements TopRatedWidg
                 backgroundColor: Color(0xff514F4F),
                 child: IconButton(
                     onPressed: (){
-                       addMovie(widget.resultsTopRated);
-                       navigateToFavourite(widget.resultsTopRated);
+                      var isExist = widget.resultsTopRatedList.contains(widget.resultsTopRated);
+                      if(isExist == true){
+                        addMovie (widget.resultsTopRated);
+                        navigateToFavourite(widget.resultsTopRated);
+                        widget.resultsTopRatedList.remove(widget.resultsTopRated) ;
+                      }else {
+                        return ;
+                      }
                     },
                     icon: Icon(Icons.add , color: Colors.white, size: 20,)),
               )

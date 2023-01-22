@@ -57,6 +57,7 @@ class _NewRealeaseCallState extends State<NewRealeaseCall> implements NewRealeas
                       child: NewRealeaseWidget(image:
                       'https://image.tmdb.org/t/p/w500/${newRealeaseList[index].posterPath}',
                         results: newRealeaseList[index],
+                        newRealeaseList: newRealeaseList,
                         ),
                     ),
                     separatorBuilder: (context , index) => SizedBox(width: 10,),

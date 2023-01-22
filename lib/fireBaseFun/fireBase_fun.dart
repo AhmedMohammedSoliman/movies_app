@@ -20,7 +20,7 @@ class FireBaseFun {
   static Stream<QuerySnapshot<FavouriteModel>> getMoviesFromFireBase () {
   return  getCollectionFromFireBase().snapshots() ;
   }
-  static Future<void> deleteMovieFromFireBase () async {
-    return await getCollectionFromFireBase().doc().delete();
+  static Future<void> deleteMovieFromFireBase (String movieId) async {
+    return await getCollectionFromFireBase().doc(movieId).delete();
   }
 }

@@ -4,14 +4,18 @@ import 'package:movies_app/watchList/watch_widget_navigator.dart';
 import 'package:movies_app/watchList/watch_widget_view_model.dart';
 import 'package:provider/provider.dart';
 
+import '../FireBaseModel/FireBaseModel.dart';
+
 class WatchItem extends StatefulWidget{
 
   String image ;
   String title ;
   String date ;
   String lan ;
+  FavouriteModel movie ;
 
-  WatchItem({required this.title , required this.image , required this.date , required this.lan});
+  WatchItem({required this.title , required this.image , required this.date , required this.lan ,
+  required this.movie});
 
   @override
   State<WatchItem> createState() => _WatchItemState();
@@ -42,7 +46,13 @@ class _WatchItemState extends State<WatchItem> implements WatchWidgetNavigator{
                     CircleAvatar(
                       backgroundColor: Colors.orange,
                       child: IconButton(onPressed: (){
-                        viewModel.deleteMovieFromFireBaseFun();
+                        viewModel.deleteMovieFromFireBaseFun(
+                          widget.movie.title ,
+                          widget.movie.image ,
+                          widget.movie.date ,
+                          widget.movie.lan,
+                          widget.movie.id
+                        );
                         print("delete");
                       }, icon: Icon(Icons.check , color: Colors.white,)),
                     )
@@ -69,4 +79,5 @@ class _WatchItemState extends State<WatchItem> implements WatchWidgetNavigator{
       ),
     );
   }
+
 }

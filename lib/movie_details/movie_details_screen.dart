@@ -7,7 +7,6 @@ import 'package:movies_app/movie_details_view_model/movie_details_view_model.dar
 import 'package:movies_app/watchList/watchListScreen.dart';
 import 'package:provider/provider.dart';
 
-import '../FireBaseModel/FireBaseModel.dart';
 class MovieDetailsScreen extends StatefulWidget{
   static const String routeName = "details";
 
@@ -120,7 +119,8 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> implements Movi
       results.title ?? ""
     , results.posterPath ?? "",
     results.releaseDate ?? "", 
-    results.originalLanguage ?? "");
+    results.originalLanguage ?? "" ,
+    );
     }
 }
 

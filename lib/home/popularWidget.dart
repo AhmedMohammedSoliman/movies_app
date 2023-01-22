@@ -6,6 +6,7 @@ class PopularWidget extends StatelessWidget{
   String title ;
   String date ;
 
+
   PopularWidget({required this.image , required this.image2 , required this.title ,
   required this.date});
 

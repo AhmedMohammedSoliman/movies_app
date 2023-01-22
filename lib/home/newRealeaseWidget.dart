@@ -5,10 +5,13 @@ import 'package:movies_app/model/PopularModel.dart';
 import 'package:movies_app/watchList/watchListScreen.dart';
 import 'package:provider/provider.dart';
 
+import '../FireBaseModel/FireBaseModel.dart';
+
 class NewRealeaseWidget extends StatefulWidget{
    String image ;
    Results results ;
-   NewRealeaseWidget({required this.image , required this.results});
+   List<Results> newRealeaseList ;
+   NewRealeaseWidget({required this.image , required this.results , required this.newRealeaseList});
 
   @override
   State<NewRealeaseWidget> createState() => _NewRealeaseWidgetState();
@@ -37,8 +40,15 @@ class _NewRealeaseWidgetState extends State<NewRealeaseWidget> implements NewRea
               backgroundColor: Color(0xff514F4F),
               child: IconButton(
                   onPressed: (){
-                    addMovie (widget.results);
-                    navigateToFavourite(widget.results);
+                    var isExist = widget.newRealeaseList.contains(widget.results);
+                    if(isExist == true){
+                      addMovie (widget.results);
+                      navigateToFavourite(widget.results);
+                      widget.newRealeaseList.remove(widget.results) ;
+                    }else {
+                      return ;
+                    }
+
                   },
                   icon: Icon(Icons.add , color: Colors.white, size: 20,)),
             )

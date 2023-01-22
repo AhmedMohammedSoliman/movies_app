@@ -11,7 +11,8 @@ class NewRealeaseWidgetViewModel extends ChangeNotifier{
         title: title,
         image: image,
         date: date,
-        lan: lan);
+        lan: lan ,
+    );
     try{
       var movieObject = await FireBaseFun.addMovieToFireBase(movie);
       print("ok");
